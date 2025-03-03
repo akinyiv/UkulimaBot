@@ -21,3 +21,6 @@ erl_crash.dump
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# Python virtual environment
+ukulima/apps/ukulima_core/venv
