@@ -24,6 +24,13 @@ Ukulima is an AI-powered chatbot designed to help farmers diagnose crop diseases
 - **Farmer-Friendly UI**: Built with Phoenix LiveView for a real-time, interactive chatbot interface.
 - **Customizable Prompts**: Fine-tune model parameters (temperature, top\_p) for better responses.
 - **Image Analysis**: Utilize LLaVA for image-based disease diagnosis.
+- **User Roles**: Farmers, Experts, and Admins.
+- **Crop Disease Diagnosis**: Upload photos of crops to diagnose diseases.
+- **Voice Input**: Interact with the app using voice commands in local languages.
+- **Offline Functionality**: Access key features without internet connectivity.
+- **Farming Tips**: Get personalized farming tips based on location and crop type.
+- **Weather and Market Information**: Receive real-time weather forecasts and market prices.
+- **Community Support**: Connect with other farmers and experts for advice.
 
 ---
 
@@ -47,7 +54,7 @@ Ukulima is an AI-powered chatbot designed to help farmers diagnose crop diseases
 2. **Python**: Install Python from [python.org](https://www.python.org/downloads/).
 3. **PostgreSQL**: Install PostgreSQL from [postgresql.org](https://www.postgresql.org/download/).
 4. **Ollama**: Install Ollama for running AI models locally:
-   ```sh
+   ```bash
    curl -fsSL https://ollama.com/install.sh | sh
    ```
 
