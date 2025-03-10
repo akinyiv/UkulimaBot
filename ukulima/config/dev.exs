@@ -1,5 +1,15 @@
 import Config
 
+# Configure your database
+config :ukulima_ui, UkulimaUi.Repo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "ukulima_ui_dev",
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -7,16 +17,16 @@ import Config
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
 # Binding to loopback ipv4 address prevents access from other machines.
-config :ukulima_web, UkulimaWebWeb.Endpoint,
+config :ukulima_ui, UkulimaUiWeb.Endpoint,
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "HTAoyZQY1Wfc+zaKytvxaYqfpvccJYGQtHpYHMGJx7/l589a7LTsilvc2BFv2gdB",
+  secret_key_base: "tCSf1m26NalcfOMrqzYem23qqrEu0usGqcNuPzIfS/pu1DAIqAoMZTPcA0BLt3G4",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:ukulima_web, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:ukulima_web, ~w(--watch)]}
+    esbuild: {Esbuild, :install_and_run, [:ukulima_ui, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:ukulima_ui, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -43,17 +53,17 @@ config :ukulima_web, UkulimaWebWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :ukulima_web, UkulimaWebWeb.Endpoint,
+config :ukulima_ui, UkulimaUiWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/ukulima_web_web/(controllers|live|components)/.*(ex|heex)$"
+      ~r"lib/ukulima_ui_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :ukulima_web, dev_routes: true
+config :ukulima_ui, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

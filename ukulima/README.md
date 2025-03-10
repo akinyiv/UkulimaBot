@@ -90,7 +90,7 @@ ollama pull llava
 ```
 
 ### Step 3: Set Up the Database (Optional)
-If you’re using a database, configure it in `apps/ukulima_web/config/dev.exs` and run:
+If you’re using a database, configure it in `apps/ukulima_ui/config/dev.exs` and run:
 ```bash
 mix ecto.create
 mix ecto.migrate
@@ -123,8 +123,8 @@ ukulima/
 ├── apps/
 │   ├── ukulima_core/             # Core app (OLLaMA, LangChain)
 │   │   ├── lib/                  # Application code
-│   │   ├── priv/                 # Python scripts
-│   ├── ukulima_web/              # Phoenix app (UI)
+│   │   ├── scripts/              # Python scripts
+│   ├── ukulima_ui/              # Phoenix app (UI)
 │       ├── assets/               # Frontend assets (CSS, JS)
 │       ├── lib/                  # Web-related code (controllers, views, LiveView)
 ├── config/                       # Umbrella-level configuration

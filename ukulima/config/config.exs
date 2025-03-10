@@ -14,21 +14,29 @@
 # is restricted to this project.
 
 # General application configuration
+# This file is responsible for configuring your application
+# and its dependencies with the aid of the Config module.
+#
+# This configuration file is loaded before any dependency and
+# is restricted to this project.
+
+# General application configuration
 import Config
 
-config :ukulima_web,
+config :ukulima_ui,
+  ecto_repos: [UkulimaUi.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :ukulima_web, UkulimaWebWeb.Endpoint,
+config :ukulima_ui, UkulimaUiWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: UkulimaWebWeb.ErrorHTML, json: UkulimaWebWeb.ErrorJSON],
+    formats: [html: UkulimaUiWeb.ErrorHTML, json: UkulimaUiWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: UkulimaWeb.PubSub,
-  live_view: [signing_salt: "ohjxBJJF"]
+  pubsub_server: UkulimaUi.PubSub,
+  live_view: [signing_salt: "qXEclNN2"]
 
 # Configures the mailer
 #
@@ -37,28 +45,28 @@ config :ukulima_web, UkulimaWebWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :ukulima_web, UkulimaWeb.Mailer, adapter: Swoosh.Adapters.Local
+config :ukulima_ui, UkulimaUi.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
-  ukulima_web: [
+  ukulima_ui: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-    cd: Path.expand("../apps/ukulima_web/assets", __DIR__),
+    cd: Path.expand("../apps/ukulima_ui/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "3.4.3",
-  ukulima_web: [
+  ukulima_ui: [
     args: ~w(
       --config=tailwind.config.js
       --input=css/app.css
       --output=../priv/static/assets/app.css
     ),
-    cd: Path.expand("../apps/ukulima_web/assets", __DIR__)
+    cd: Path.expand("../apps/ukulima_ui/assets", __DIR__)
   ]
 
 # Configures Elixir's Logger
