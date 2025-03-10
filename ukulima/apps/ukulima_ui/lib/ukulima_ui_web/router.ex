@@ -17,11 +17,11 @@ defmodule UkulimaUiWeb.Router do
     plug :accepts, ["json"]
   end
 
- scope "/", UkulimaUiWeb do
-  pipe_through :browser
+  scope "/", UkulimaUiWeb do
+    pipe_through :browser
 
-  live "/", LandingPageLive
-end
+    live "/", LandingPageLive
+  end
 
   # Other scopes may use custom stacks.
   # scope "/api", UkulimaUiWeb do

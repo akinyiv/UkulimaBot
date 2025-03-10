@@ -5,69 +5,129 @@ defmodule UkulimaUiWeb.UserSettingsLive do
 
   def render(assigns) do
     ~H"""
-    <.header class="text-center">
-      Account Settings
-      <:subtitle>Manage your account email address and password settings</:subtitle>
-    </.header>
-
-    <div class="space-y-12 divide-y">
-      <div>
-        <.simple_form
-          for={@email_form}
-          id="email_form"
-          phx-submit="update_email"
-          phx-change="validate_email"
-        >
-          <.input field={@email_form[:email]} type="email" label="Email" required />
-          <.input
-            field={@email_form[:current_password]}
-            name="current_password"
-            id="current_password_for_email"
-            type="password"
-            label="Current password"
-            value={@email_form_current_password}
-            required
-          />
-          <:actions>
-            <.button phx-disable-with="Changing...">Change Email</.button>
-          </:actions>
-        </.simple_form>
+    <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-8">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl font-bold text-green-700">Account Settings</h2>
+        <p class="text-gray-600 mt-2">Manage your email address and password settings.</p>
       </div>
-      <div>
-        <.simple_form
-          for={@password_form}
-          id="password_form"
-          action={~p"/users/log_in?_action=password_updated"}
-          method="post"
-          phx-change="validate_password"
-          phx-submit="update_password"
-          phx-trigger-action={@trigger_submit}
-        >
-          <input
-            name={@password_form[:email].name}
-            type="hidden"
-            id="hidden_user_email"
-            value={@current_email}
-          />
-          <.input field={@password_form[:password]} type="password" label="New password" required />
-          <.input
-            field={@password_form[:password_confirmation]}
-            type="password"
-            label="Confirm new password"
-          />
-          <.input
-            field={@password_form[:current_password]}
-            name="current_password"
-            type="password"
-            label="Current password"
-            id="current_password_for_password"
-            value={@current_password}
-            required
-          />
-          <:actions>
-            <.button phx-disable-with="Changing...">Change Password</.button>
-          </:actions>
-        </.simple_form>
+
+      <div class="space-y-12 divide-y">
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Update Email</h3>
+          <.simple_form
+            for={@email_form}
+            id="email_form"
+            phx-submit="update_email"
+            phx-change="validate_email"
+            class="space-y-4"
+          >
+            <div>
+              <label for="email" class="block text-gray-700 font-medium">New Email</label>
+              <.input
+                field={@email_form[:email]}
+                type="email"
+                class="w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+                placeholder="Enter new email"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="current_password_for_email" class="block text-gray-700 font-medium">
+                Current Password
+              </label>
+              <.input
+                field={@email_form[:current_password]}
+                name="current_password"
+                id="current_password_for_email"
+                type="password"
+                class="w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+                placeholder="Enter current password"
+                value={@email_form_current_password}
+                required
+              />
+            </div>
+
+            <div class="mt-4">
+              <.button
+                phx-disable-with="Changing..."
+                class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+              >
+                Change Email
+              </.button>
+            </div>
+          </.simple_form>
+        </div>
+
+        <div class="pt-8">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Change Password</h3>
+          <.simple_form
+            for={@password_form}
+            id="password_form"
+            action={~p"/users/log_in?_action=password_updated"}
+            method="post"
+            phx-change="validate_password"
+            phx-submit="update_password"
+            phx-trigger-action={@trigger_submit}
+            class="space-y-4"
+          >
+            <input
+              name={@password_form[:email].name}
+              type="hidden"
+              id="hidden_user_email"
+              value={@current_email}
+            />
+
+            <div>
+              <label for="password" class="block text-gray-700 font-medium">New Password</label>
+              <.input
+                field={@password_form[:password]}
+                type="password"
+                class="w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+                placeholder="Enter new password"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="password_confirmation" class="block text-gray-700 font-medium">
+                Confirm New Password
+              </label>
+              <.input
+                field={@password_form[:password_confirmation]}
+                type="password"
+                class="w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+                placeholder="Confirm new password"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="current_password_for_password" class="block text-gray-700 font-medium">
+                Current Password
+              </label>
+              <.input
+                field={@password_form[:current_password]}
+                name="current_password"
+                type="password"
+                id="current_password_for_password"
+                class="w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+                placeholder="Enter current password"
+                value={@current_password}
+                required
+              />
+            </div>
+
+            <div class="mt-4">
+              <.button
+                phx-disable-with="Changing..."
+                class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+              >
+                Change Password
+              </.button>
+            </div>
+          </.simple_form>
+        </div>
       </div>
     </div>
     """

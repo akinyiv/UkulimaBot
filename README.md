@@ -58,7 +58,7 @@ Ukulima is an AI-powered chatbot designed to help farmers diagnose crop diseases
    ```
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/your-username/ukulima.git
+git clone https://github.com/akinyiv/UkulimaBot
 cd ukulima
 ```
 

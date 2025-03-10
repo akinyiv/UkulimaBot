@@ -6,38 +6,70 @@ defmodule UkulimaUiWeb.UserRegistrationLive do
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
-      <.header class="text-center">
-        Register for an account
-        <:subtitle>
-          Already registered?
-          <.link navigate={~p"/users/log_in"} class="font-semibold text-brand hover:underline">
-            Log in
-          </.link>
-          to your account now.
-        </:subtitle>
-      </.header>
+    <div class="min-h-screen flex items-center justify-center bg-gray-50 relative">
+      <div class="absolute top-0">
+        <.back navigate={~p"/"}>
+          Home
+        </.back>
+      </div>
 
-      <.simple_form
-        for={@form}
-        id="registration_form"
-        phx-submit="save"
-        phx-change="validate"
-        phx-trigger-action={@trigger_submit}
-        action={~p"/users/log_in?_action=registered"}
-        method="post"
-      >
-        <.error :if={@check_errors}>
-          Oops, something went wrong! Please check the errors below.
-        </.error>
+      <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+        <div class="text-center mb-6">
+          <h2 class="text-3xl font-bold text-green-700">Create Your Account</h2>
+          <p class="text-gray-600 mt-2">
+            Already have an account?
+            <.link navigate={~p"/users/log_in"} class="text-green-600 font-semibold hover:underline">
+              Log in
+            </.link>
+          </p>
+        </div>
 
-        <.input field={@form[:email]} type="email" label="Email" required />
-        <.input field={@form[:password]} type="password" label="Password" required />
+        <.simple_form
+          for={@form}
+          id="registration_form"
+          phx-submit="save"
+          phx-change="validate"
+          phx-trigger-action={@trigger_submit}
+          action={~p"/users/log_in?_action=registered"}
+          method="post"
+          class="space-y-4"
+        >
+          <.error :if={@check_errors} class="text-red-600 text-sm">
+            Oops! Something went wrong. Please check the errors below.
+          </.error>
 
-        <:actions>
-          <.button phx-disable-with="Creating account..." class="w-full">Create an account</.button>
-        </:actions>
-      </.simple_form>
+          <div>
+            <label for="email" class="block text-gray-700 font-medium">Email</label>
+            <.input
+              field={@form[:email]}
+              type="email"
+              class="w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="password" class="block text-gray-700 font-medium">Password</label>
+            <.input
+              field={@form[:password]}
+              type="password"
+              class="w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <div class="mt-6">
+            <.button
+              phx-disable-with="Creating account..."
+              class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            >
+              Create Account
+            </.button>
+          </div>
+        </.simple_form>
+      </div>
     </div>
     """
   end

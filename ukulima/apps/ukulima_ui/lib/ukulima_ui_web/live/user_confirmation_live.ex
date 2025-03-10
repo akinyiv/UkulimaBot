@@ -5,20 +5,43 @@ defmodule UkulimaUiWeb.UserConfirmationLive do
 
   def render(%{live_action: :edit} = assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
-      <.header class="text-center">Confirm Account</.header>
+    <div class="min-h-screen flex items-center justify-center bg-gray-50">
+      <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+        <div class="text-center mb-6">
+          <h2 class="text-3xl font-bold text-green-700">Confirm Your Account</h2>
+          <p class="text-gray-600 mt-2">
+            Click the button below to confirm your account and get started.
+          </p>
+        </div>
 
-      <.simple_form for={@form} id="confirmation_form" phx-submit="confirm_account">
-        <input type="hidden" name={@form[:token].name} value={@form[:token].value} />
-        <:actions>
-          <.button phx-disable-with="Confirming..." class="w-full">Confirm my account</.button>
-        </:actions>
-      </.simple_form>
+        <.simple_form
+          for={@form}
+          id="confirmation_form"
+          phx-submit="confirm_account"
+          class="space-y-4"
+        >
+          <input type="hidden" name={@form[:token].name} value={@form[:token].value} />
 
-      <p class="text-center mt-4">
-        <.link href={~p"/users/register"}>Register</.link>
-        | <.link href={~p"/users/log_in"}>Log in</.link>
-      </p>
+          <div class="mt-6">
+            <.button
+              phx-disable-with="Confirming..."
+              class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            >
+              Confirm My Account
+            </.button>
+          </div>
+        </.simple_form>
+
+        <p class="text-center text-sm mt-4 text-gray-600">
+          <.link href={~p"/users/register"} class="text-green-600 font-semibold hover:underline">
+            Register
+          </.link>
+          |
+          <.link href={~p"/users/log_in"} class="text-green-600 font-semibold hover:underline">
+            Log in
+          </.link>
+        </p>
+      </div>
     </div>
     """
   end
